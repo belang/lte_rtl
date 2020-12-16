@@ -251,6 +251,7 @@ def pseudo_random_sequence_generation(c_init, length):
     x_2 = collections.deque()
     c = collections.deque()
     # math: c_init = \sum_{i=0}^{30} x_2(i) . 2^i
+    # caculate x_2 by c_init.
     tv = 2**31
     for x in range(31):
         if c_init >= tv:
@@ -262,14 +263,14 @@ def pseudo_random_sequence_generation(c_init, length):
     # x_1[n+31] = (x_1[n+3] + x_1[n])%2
     # x_2[n+31] = (x_2[n+3] + x_2[n+2] + x_2[n+1] +x_2[n])%2
     # c[n] = (x_1[n+N_c]+x_2[n+N_c])%2
-    for n in range(l600):
+    for n in range(N_c):
         x_1.append((x_1[n+3] + x_1[n])%2)
         x_2.append((x_2[n+3] + x_2[n+2] + x_2[n+1] +x_2[n])%2)
     for n in range(length):
-        m = n+1600
+        m = n+N_c
         x_1.append((x_1[m+3] + x_1[m])%2)
         x_2.append((x_2[m+3] + x_2[m+2] + x_2[m+1] +x_2[m])%2)
-        c.append((x_1[n+N_c]+x_2[n+N_c])%2)
+        c.append((x_1[m]+x_2[m])%2)
     return c
 
 def QPSK(din, MUSTIdx='00', XL_fai=(0,0)):
