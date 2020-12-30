@@ -1,27 +1,31 @@
 
+CPP = g++
 
 s_include = ..
-source = ../pseudo_random_sequence_generation.cpp ../scrambling.cpp test.cpp
+source = ../pseudo_random_sequence_generation.c test.c
+#source = ../pseudo_random_sequence_generation.c ../scrambling.c test.c
 target = test.exe
 
 default: all
 
 a:
-	g++ test.cpp -o a.exe
+	gcc test.c -o a.exe
 
 c:
-	gcc -I ${s_include} ${source} -o ${target}
+	gcc -I ${s_include} ${source} -o pseudo_random_sequence_generation.o
 
 all:
-	g++ -I ${s_include} ${source} -o ${target}
+	gcc -I ${s_include} ${source} -o ${target}
 	./${target}
 
 compile:
-	g++ -I -c -o
+	gcc -I -c -o
 
 linke:
-	g++ -I -c -o
+	gcc -I -c -o
 
 debug:
-	g++ -g -I ${s_include} ${source} -o ${target}
+	gcc -g -I ${s_include} ${source} -o ${target}
 
+share:
+	gcc -shared -I ${s_include} ${source} -o pseudo_random_sequence_generation.o

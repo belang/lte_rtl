@@ -1,18 +1,20 @@
+#include <process.h>
 #include <math.h>
 #include <stdio.h>
 
-CharArray pseudo_random_sequence_generation(int c_init, int length)
+char * pseudo_random_sequence_generation(int c_init, int length)
 {
-    CharArray out;
+    char * out;
     int N_c = 1600;
     int tdata_size = length+N_c;
-    char x_1[tdata_size], x_2[tdata_size], c[length];
+    char x_1[tdata_size], x_2[tdata_size+1], c[length];
     int tv = (int)pow(2, 31);
     int i_m;
     for (int i = 0; i < tdata_size; i++) {
         x_2[i] = '0';
         x_1[i] = '0';
     }
+    x_2[tdata_size] = '\0';
     for (int i = 0; i < 31; i++) {
         if (c_init >= tv) {
             x_2[i] = '1';
@@ -31,8 +33,12 @@ CharArray pseudo_random_sequence_generation(int c_init, int length)
         printf("%c", x_2[i]);
     }
     printf("\n");
-    out.par = x_2;
-    out.length = tdata_size;
+    printf("print in string: ");
+    printf("%s", x_2);
+    printf("\n");
+    out = x_2;
+    //out.par = x_2;
+    //out.length = tdata_size;
     //int ti = 0;
     //printf("result in function is: ");
     //for (int i = 0; i < tdata_size; i++) {
